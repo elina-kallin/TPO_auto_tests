@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "tpo-auto-tests"
+version = "0.1.0"
+description = ""
+authors = ["Елена Бакальская <elina_kallin@mail.ru>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pytest = "^8.3.5"
+selenium = "^4.31.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
