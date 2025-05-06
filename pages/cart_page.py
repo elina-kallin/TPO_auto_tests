@@ -6,9 +6,10 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class CartPage(BasePage):
       
-    BUTTON_ADD_TO_CART = (By.CSS_SELECTOR, 'button[data-meta-name="Snippet__cart-button"]')
+    BUTTON_ADD_TO_CART = (By.XPATH, '/html/body/div[2]/div[1]/main/section/div[3]/div/div[3]/section/div[2]/div[2]/div[1]/div/div[2]/div[8]/div[3]/div[2]/button')
     SVG_CART = (By.CSS_SELECTOR, 'a[href="/order/"]')
     NOUTS = (By.CSS_SELECTOR, 'div[data-meta-name="ProductHorizontalSnippet"]')
+    PRODUCT_TITLES = (By.CSS_SELECTOR, 'div[data-meta-product-id="2002220"]')  # класс или другой селектор для товаров
 
 
     def open_page_noutbuki(self):
@@ -20,12 +21,9 @@ class CartPage(BasePage):
 
     def add_laptop_to_cart(self):
 
-        nouts = self.driver.find_elements(*self.NOUTS)
-        first_nout = nouts[1]
-        # add_nout_button = first_nout.find_element(*self.BUTTON_ADD_TO_CART)
+        nouts = self.driver.find_elements(*self.PRODUCT_TITLES)
+        first_nout = nouts[0]
 
-        add_button = WebDriverWait(first_nout, 10).until(
+        add_button = WebDriverWait(first_nout, 5).until(
             EC.element_to_be_clickable(self.BUTTON_ADD_TO_CART))
-        add_button.click()
-
-        # add_nout_button.click()
+        self.driver.execute_script("arguments[0].click();", add_button) 
